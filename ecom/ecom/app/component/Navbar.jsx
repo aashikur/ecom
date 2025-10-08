@@ -1,25 +1,38 @@
+import Link from 'next/link';
 import React from 'react';
+import { IoMenu } from 'react-icons/io5';
+import { MdKeyboardArrowDown } from "react-icons/md";
 
 const Navbar = () => {
     return (
-        <div className='flex justify-between border-b border-gray-300 h-10 items-center'>
-            <div>
-                <h1>ECOM</h1>
-            </div>
-            <ul className='sm:flex gap-2 sm:gap-3 md:gap-4 hidden'>
-                <li> <a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Cart</a></li>
-            </ul>
+        <div className=' border-b border-gray-300 '>
+            <div className='max-w-[1200px] mx-auto px-4 flex justify-between min-h-10 items-center'>
+                <div>
+                  <Link href="/" className='font-bold text-xl'>E-Shop</Link>
+                </div>
+                <ul className='sm:flex gap-2 sm:gap-3 md:gap-4 hidden items-center'>
+                    <li> <Link href="/">Home</Link></li>
+                    <li><Link href="/about">About</Link></li>
+                    <li><Link href="contact">Contact</Link></li>
+                    <li><Link href="cart">Cart</Link></li>
+                    <li><button 
+                    className='
+                    border flex items-center gap-1 border-gray-300 px-4 py-2 rounded-full text-xs
+                    '>Dashboard <MdKeyboardArrowDown /> </button></li>
+                </ul>
 
-            <ul className='inline-block sm:hidden'>
-            menu
-            </ul>
+                <ul className='flex items-center gap-4 sm:hidden'>
+                    <li><IoMenu/></li>
+                     <li><button 
+                    className='
+                    border flex items-center gap-1 border-gray-300 px-4 py-2 rounded-full text-xs
+                    '>Dashboard <MdKeyboardArrowDown /> </button></li>
+                </ul>
 
-            <div className='flex gap-2 sm:gap-3 md:gap-4'>
-                <button>Signup</button>
-                <button className='border px-4 rounded-md'>Login</button>
+                <div className='flex gap-2 sm:gap-3 md:gap-4'>
+                    <button>Signup</button>
+                    <button className='border px-4 rounded-md'>Login</button>
+                </div>
             </div>
         </div>
     );

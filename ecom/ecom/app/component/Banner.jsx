@@ -7,7 +7,9 @@ import Button from '../ui/Button';
 const Banner = () => {
     return (
         <div className='py-4 md:py-10 relative'>
-            <Image src="/assets/banner.jpg" alt="Banner" width={1920} height={1080} />
+            <Image 
+             className='rounded-md'
+            src="/assets/banner.jpg" alt="Banner" width={1920} height={1080} />
             <div className="absolute w-full h-full top-0 left-0 flex justify-center items-center">
                 <div className='w-2/3 max-w-[600px] px-4'>
                     <div className='max-w-[400px] space-y-3'>
@@ -17,6 +19,8 @@ const Banner = () => {
                         <h3 className='text-sm md:text-lg text-white opacity-75'>
                             Your Trusted Online Shopping Destination to Quality Products at Affordable Prices </h3>
                         <Button className="" text="Shop Now" type="primary" />
+                        <Button text="Learn More" type="ghost" arrow="true" />
+
 
                     </div>
 

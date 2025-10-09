@@ -106,7 +106,7 @@ const Page = ({ params }) => {
                                 <ul className="text-sm text-gray-600 space-y-1">
                                     <li>• Free standard delivery</li>
                                     <li>• Express delivery available</li>
-                                    <li>• 30-day return policy</li>
+                                    <li>• 30-day return policy </li>
                                 </ul>
                             </div>
                         </div>

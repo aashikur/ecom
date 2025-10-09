@@ -6,7 +6,7 @@ import Button from '../ui/Button';
 
 const Banner = () => {
     return (
-        <div className='py-4 md:py-10 relative'>
+        <div className='pt-4 md:pt-10 relative'>
             <Image 
              className='rounded-md'
             src="/assets/banner.jpg" alt="Banner" width={1920} height={1080} />

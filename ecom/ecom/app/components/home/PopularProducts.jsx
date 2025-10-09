@@ -9,6 +9,7 @@ import { IoBookmark, IoBookmarkOutline } from 'react-icons/io5';
 const PopularProducts = ({ text = 'Popular Products', viewAll = true }) => {
     const [isBooked, setIsBooked] = React.useState(false) 
 console.log(productsDummyData);
+
     return (
         <section className=' py-14'>
             <h1 className='text-2xl font-bold'>

@@ -6,12 +6,13 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 const Navbar = () => {
     return (
         <div className=' border-b border-gray-300 '>
-            <div className='max-w-[1200px] mx-auto px-4 flex justify-between min-h-10 items-center'>
+            <div className='max-w-[1200px] mx-auto px-4 flex justify-between min-h-15 items-center'>
                 <div>
                   <Link href="/" className='font-bold text-xl'>E-Shop</Link>
                 </div>
                 <ul className='sm:flex gap-2 sm:gap-3 md:gap-4 hidden items-center'>
                     <li> <Link href="/">Home</Link></li>
+                    <li> <Link href="/products">Products</Link></li>
                     <li><Link href="/about">About</Link></li>
                     <li><Link href="contact">Contact</Link></li>
                     <li><Link href="cart">Cart</Link></li>

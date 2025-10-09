@@ -5,7 +5,7 @@ import { IoArrowForward } from "react-icons/io5";
 const Button = ({ text, type = 'primary', className = '', arrow = false }) => {
   // Base styles for all buttons
   const base =
-    'px-4 md:px-8 py-2 rounded-md inline-block text-sm md:text-base font-medium cursor-pointer transition-all duration-200 group';
+    'px-4 md:px-8 py-2 rounded-full inline-block text-sm md:text-base font-medium cursor-pointer transition-all duration-200 group';
 
   // Conditional styling based on type
   const buttonClass =

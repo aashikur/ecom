@@ -53,7 +53,7 @@ const AboutPage = () => {
                 <div className="max-w-6xl mx-auto px-4">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                         {stats.map((stat, index) => (
-                            <div key={index} className="text-center">
+                            <div key={index} className="text-center flex flex-col justify-center items-center gap-5">
                                 <div className="text-blue-600 text-3xl mb-2">
                                     {stat.icon}
                                 </div>

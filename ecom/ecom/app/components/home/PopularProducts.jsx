@@ -7,10 +7,10 @@ import { IoMdStar } from "react-icons/io";
 import { IoBookmark, IoBookmarkOutline } from 'react-icons/io5';
 
 
-const PopularProducts = ({ text = 'Popular Products', viewAll = true }) => {
+const PopularProducts = ({ text = 'Popular Products', viewAll = true , limits = "" }) => {
     const [isBooked, setIsBooked] = React.useState(false)
-    console.log(productsDummyData);
-
+    // console.log(productsDummyData);
+    const display = limits ? productsDummyData.slice(0, limits) : productsDummyData;
     return (
         <section className=' py-14'>
             <h1 className='text-2xl font-bold'>
@@ -19,7 +19,7 @@ const PopularProducts = ({ text = 'Popular Products', viewAll = true }) => {
             <div className='mt-8'>
                 <div className='grid  grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 gap-y-6 '>
                     {
-                        productsDummyData.map(product => <div
+                        display.map(product => <div
                             // onClick={() => {alert('clicked', product.name)}}
                             className='flex flex-col max-w-[200px] w-full  relative cursor-pointer'
                             key={product._id}>

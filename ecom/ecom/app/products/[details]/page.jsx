@@ -1,12 +1,13 @@
 import Container from '@/app/components/Container';
+import PopularProducts from '@/app/components/home/PopularProducts';
 import { productsDummyData } from '@/public/assets/assets';
 import Image from 'next/image';
 import React from 'react';
 import { FaShoppingCart, FaHeart } from 'react-icons/fa';
 import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
 
-const Page = ({params}) => {
-    const {details} = params;
+const Page = ({ params }) => {
+    const { details } = params;
     const product = productsDummyData.find(product => product._id === details) || {};
 
     return (
@@ -14,7 +15,7 @@ const Page = ({params}) => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Left: Image Gallery */}
                 <div className="space-y-4">
-                    <div className="aspect-square relative rounded-lg overflow-hidden border">
+                    <div className="aspect-square relative rounded-lg overflow-hidden border border-gray-100 bg-gray-50">
                         <Image
                             src={product.image[0]}
                             alt={product.name}
@@ -24,7 +25,7 @@ const Page = ({params}) => {
                     </div>
                     <div className="grid grid-cols-4 gap-4">
                         {product.image.map((img, index) => (
-                            <div key={index} className="aspect-square relative rounded-lg overflow-hidden border cursor-pointer hover:border-blue-500">
+                            <div key={index} className="aspect-square relative rounded-lg overflow-hidden border cursor-pointer border-gray-100 bg-gray-50 hover:border-gray-200">
                                 <Image
                                     src={img}
                                     alt={`${product.name} - ${index + 1}`}
@@ -74,15 +75,17 @@ const Page = ({params}) => {
 
                     {/* Action Buttons */}
                     <div className="flex flex-col sm:flex-row gap-4">
-                        <button className="flex-1 bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
+
+                        <button className="flex-1 bg-gray-900 text-white py-3 px-6 rounded-full font-medium hover:bg-gray-800 transition-colors flex items-center justify-center gap-2">
                             <FaShoppingCart />
                             Add to Cart
                         </button>
-                        <button className="flex-1 bg-gray-900 text-white py-3 px-6 rounded-lg font-medium hover:bg-gray-800 transition-colors">
+                        <button className="flex-1 bg-blue-600 text-white py-3 px-6 rounded-full font-medium hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
+
                             Buy Now
                         </button>
-                        <button className="p-3 border rounded-lg hover:bg-gray-50 transition-colors">
-                            <FaHeart className="text-gray-400 hover:text-red-500" />
+                        <button className="p-3 border border-gray-400 group rounded-full hover:bg-gray-50 transition-colors">
+                            <FaHeart className="text-gray-400 group-hover:text-red-500" />
                         </button>
                     </div>
 
@@ -110,6 +113,10 @@ const Page = ({params}) => {
                     </div>
                 </div>
             </div>
+            
+            <div className="border-t py-6 my-8 border-gray-100" ></div>
+            <PopularProducts text="Similar Products" viewAll={false} limits={4} />
+                    
         </Container>
     );
 };

@@ -30,9 +30,9 @@ const Navbar = () => {
                     '>Dashboard <MdKeyboardArrowDown /> </button></li>
                 </ul>
 
-                <div className='flex gap-2 sm:gap-3 md:gap-4'>
-                    <button>Signup</button>
-                    <button className='border px-4 rounded-md'>Login</button>
+                <div className='flex gap-2 items-center sm:gap-3 text-sm md:gap-4'>
+                    <Link href="/signup" className=''>Signup</Link>
+                    <Link href={"/login"} className='border px-4 py-1 rounded-full border-gray-400'>Login</Link>
                 </div>
             </div>
         </div>

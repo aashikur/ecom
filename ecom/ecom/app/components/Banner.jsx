@@ -46,7 +46,7 @@ const Banner = () => {
                             <Button 
                                 text="Shop Collection" 
                                 type="primary"
-                                className="px-8 py-3 text-lg hover:scale-105 transition-transform"
+                                className="px-8 py-3 text-lg hover:scale-105 transition-transform "
                             />
                             <Button 
                                 text="Watch Video" 

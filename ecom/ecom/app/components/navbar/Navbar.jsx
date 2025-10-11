@@ -1,6 +1,6 @@
 "use client"
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { IoMenu } from 'react-icons/io5';
 import { MdKeyboardArrowDown } from "react-icons/md";
 import DropdownMenuDashboard from './DropdownMenuDashboard';
@@ -11,6 +11,21 @@ const Navbar = () => {
     const [Drop1, setDrop1] = React.useState(false);
     const [Drop2, setDrop2] = React.useState(false);
     const [Drop3, setDrop3] = React.useState(false);
+
+    const manageRef = React.useRef(null);
+    const dashboardRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (manageRef.current && !manageRef.current.contains(e.target)) setDrop1(false);
+            if (dashboardRef.current && !dashboardRef.current.contains(e.target)) setDrop2(false);
+        }
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+
+    },[])
+
 
     return (
         <div className=' border-b border-gray-300 bg-white  z-100 sticky top-0'>
@@ -30,14 +45,14 @@ const Navbar = () => {
                     <li><Link href="/about">About</Link></li>
                     <li><Link href="contact">Contact</Link></li>
                     <li><Link href="cart">Cart</Link></li>
-                    <li className='relative hidden md:block'>
+                    <li ref={manageRef} className='relative hidden md:block'>
                         <button className=' border flex items-center gap-1 border-gray-300 px-4 py-2 rounded-full text-xs'
                         onClick={() => setDrop1(!Drop1)}>
                             Manage <MdKeyboardArrowDown />
                         </button>
                         {Drop1 &&  <span onClick={() => setDrop1(!Drop1)}><DropdownMenuDashboard /></span>}
                     </li>
-                    <li className='relative'>
+                    <li ref={dashboardRef} className='relative'>
                         <button className=' border flex items-center gap-1 border-gray-300 px-4 py-2 rounded-full text-xs'
                         onClick={() => setDrop2(!Drop2)}>
                             Dashboard <MdKeyboardArrowDown />

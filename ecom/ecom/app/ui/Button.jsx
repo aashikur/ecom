@@ -10,7 +10,7 @@ const Button = ({ text, type = 'primary', className = '', arrow = false }) => {
   // Conditional styling based on type
   const buttonClass =
     type === 'primary'
-      ? 'bg-blue-500 hover:bg-blue-600 text-white'
+      ? 'bg-white  text-black'
       : type === 'outline'
       ? 'border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white'
       : type === 'ghost'

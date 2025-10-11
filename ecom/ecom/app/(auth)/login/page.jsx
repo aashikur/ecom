@@ -33,7 +33,7 @@ const LoginPage = () => {
                         <div className="w-full md:w-1/3 p-8 md:p-12 bg-white">
                             <div className="max-w-sm mx-auto">
                                 <h2 className="text-3xl font-bold text-gray-800 mb-8">Welcome Back</h2>
-                                
+
                                 {/* Login Form */}
                                 <form className="space-y-6">
                                     <div>
@@ -56,7 +56,7 @@ const LoginPage = () => {
                                             placeholder="Enter your password"
                                         />
                                     </div>
-                                    
+
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center">
                                             <input
@@ -81,12 +81,19 @@ const LoginPage = () => {
                                 </form>
 
                                 {/* Google Sign In */}
-                                <div className="mt-6">
+                                <div className="mt-6 hidden">
                                     <button className="w-full flex items-center justify-center gap-2 bg-white border border-gray-200 text-gray-700 py-3 px-6 rounded-xl font-medium hover:bg-gray-50 transition-colors">
                                         <FaGoogle className="text-red-500" />
                                         Sign in with Google
                                     </button>
                                 </div>
+
+
+                                {/* Google Sign In */}
+                               <div className='my-6 flex justify-center'>
+                                 <AuthButton className="w-full py-3 text-center" />
+                               </div>
+
 
                                 {/* Sign Up Link */}
                                 <p className="mt-8 text-center text-gray-600">
@@ -104,7 +111,7 @@ const LoginPage = () => {
                                 <h3 className="text-2xl font-bold text-gray-800 mb-8">
                                     Why Join E-Shop?
                                 </h3>
-                                
+
                                 <div className="grid md:grid-cols-2 gap-8">
                                     {benefits.map((benefit, index) => (
                                         <div key={index} className="bg-white p-6 rounded-xl border border-gray-100">
@@ -129,7 +136,6 @@ const LoginPage = () => {
                             </div>
                         </div>
 
-                        <AuthButton/>
 
 
                     </div>

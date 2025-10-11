@@ -1,8 +1,9 @@
+"use client"; // Only at the top if using client components
+import { SessionProvider } from "next-auth/react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/Footer";
-import Banner from "./components/Banner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,9 +25,9 @@ export default function RootLayout({ children }) {
         <Navbar />
 
 
-        <section className="">
+        <SessionProvider className="">
           {children}
-        </section>
+        </SessionProvider>
         <Footer />
 
       </body>

@@ -2,6 +2,7 @@ import Container from '@/app/components/Container';
 import React from 'react';
 import Link from 'next/link';
 import { FaGoogle } from 'react-icons/fa';
+import AuthButton from '@/app/components/AuthButton';
 
 const LoginPage = () => {
     const benefits = [
@@ -127,6 +128,10 @@ const LoginPage = () => {
                                 </div>
                             </div>
                         </div>
+
+                        <AuthButton/>
+
+
                     </div>
                 </div>
             </div>

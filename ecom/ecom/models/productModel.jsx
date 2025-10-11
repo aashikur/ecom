@@ -2,6 +2,10 @@ import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema(
   {
+    userId: {
+      type: String,
+      required: [true, "User ID is required"],
+    },
     name: {
       type: String,
       required: [true, "Please add a product name"],
@@ -14,18 +18,22 @@ const productSchema = new mongoose.Schema(
       type: Number,
       required: [true, "Please add a product price"],
     },
-    category: {
-      type: String,
-      required: false,
-    },
-    stock: {
+    offerPrice: {
       type: Number,
-      default: 0,
+      required: false,
     },
     image: {
-      type: String,
+      type: [String], // Changed to array of strings for multiple images
       required: false,
     },
+    category: {
+      type: String,
+      required: [true, "Please add a product category"],
+    },
+    date: {
+      type: Number,
+      default: Date.now,
+    }
   },
   { timestamps: true }
 );

@@ -1,38 +1,151 @@
 "use client";
 import React, { useState } from "react";
 import Container from "../components/Container";
-import { FaBox, FaShoppingCart, FaTags, FaChartLine } from "react-icons/fa";
 import Benefits from "./Benefits";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const AddProduct = () => {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+  
+  // Initial form state
   const [form, setForm] = useState({
     name: "",
     description: "",
     price: "",
+    offerPrice: "",
+    category: "",
+    image: [""], // Array for image URLs
+    userId: session?.user?.email || "",
   });
 
+  // Loading state
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
+
+  // Auth check
+  if (!session) {
+    router.push("/login");
+    return null;
+  }
+
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: name === "price" || name === "offerPrice" ? parseFloat(value) || "" : value,
+    }));
+  };
+
+  // Handle image URL changes
+  const handleImageUrlChange = (index, value) => {
+    const newImages = [...form.image];
+    newImages[index] = value;
+    setForm(prev => ({
+      ...prev,
+      image: newImages
+    }));
+  };
+
+  // Add new image URL input
+  const addImageUrl = () => {
+    setForm(prev => ({
+      ...prev,
+      image: [...prev.image, ""]
+    }));
+  };
+
+  // Remove image URL input
+  const removeImageUrl = (index) => {
+    setForm(prev => ({
+      ...prev,
+      image: prev.image.filter((_, i) => i !== index)
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const productData = {
+        ...form,
+        image: form.image.filter(url => url.trim() !== ""), // Remove empty URLs
+        date: Date.now(),
+      };
+
+      console.log("form subbmited: ", productData)
+
       const res = await fetch("/api/products", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify(productData),
       });
+
       const data = await res.json();
-      console.log(data);
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to add product");
+      }
+
       alert("Product added successfully!");
-      setForm({ name: "", description: "", price: "" });
+      setForm({
+        name: "",
+        description: "",
+        price: "",
+        offerPrice: "",
+        category: "",
+        image: [""],
+        userId: session?.user?.email || "",
+      });
     } catch (err) {
       console.error(err);
-      alert("Error adding product");
+      alert(err.message || "Error adding product");
     }
   };
 
+  // Replace the file input with URL inputs
+  const renderImageUrlInputs = () => (
+    <div className="space-y-4">
+      {form.image.map((url, index) => (
+        <div key={index} className="flex gap-2">
+          <input
+            type="url"
+            value={url}
+            onChange={(e) => handleImageUrlChange(index, e.target.value)}
+            placeholder="Enter image URL"
+            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+          />
+          <button
+            type="button"
+            onClick={() => removeImageUrl(index)}
+            className="px-3 py-2 text-red-500 hover:bg-red-50 rounded-lg"
+          >
+            Remove
+          </button>
+        </div>
+      ))}
+      <button
+        type="button"
+        onClick={addImageUrl}
+        className="text-blue-600 hover:text-blue-700 font-medium"
+      >
+        + Add Another Image URL
+      </button>
+    </div>
+  );
+
+  // Replace the file input section with this in your form
+  const imageInputSection = (
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-2">
+        Product Image URLs
+      </label>
+      {renderImageUrlInputs()}
+    </div>
+  );
+
+  // Update your form's image input section with {imageInputSection}
   return (
     <Container>
       <div className="min-h-[80vh] py-12">
@@ -67,6 +180,21 @@ const AddProduct = () => {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Category
+                    </label>
+                    <input
+                      type="text"
+                      name="category"
+                      value={form.category}
+                      onChange={handleChange}
+                      placeholder="Enter product category"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
                       Description
                     </label>
                     <textarea
@@ -80,23 +208,46 @@ const AddProduct = () => {
                     />
                   </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Price
-                    </label>
-                    <div className="relative">
-                      <span className="absolute left-3 top-3 text-gray-500">$</span>
-                      <input
-                        type="number"
-                        name="price"
-                        value={form.price}
-                        onChange={handleChange}
-                        placeholder="0.00"
-                        className="w-full pl-8 pr-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
-                        required
-                      />
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Price
+                      </label>
+                      <div className="relative">
+                        <span className="absolute left-3 top-3 text-gray-500">$</span>
+                        <input
+                          type="number"
+                          name="price"
+                          value={form.price}
+                          onChange={handleChange}
+                          placeholder="0.00"
+                          step="0.01"
+                          className="w-full pl-8 pr-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Offer Price
+                      </label>
+                      <div className="relative">
+                        <span className="absolute left-3 top-3 text-gray-500">$</span>
+                        <input
+                          type="number"
+                          name="offerPrice"
+                          value={form.offerPrice}
+                          onChange={handleChange}
+                          placeholder="0.00"
+                          step="0.01"
+                          className="w-full pl-8 pr-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                        />
+                      </div>
                     </div>
                   </div>
+
+                  {imageInputSection}
 
                   <button
                     type="submit"
@@ -110,7 +261,7 @@ const AddProduct = () => {
 
             {/* Benefits Section (Right) */}
             <div className="w-full md:w-1/2 p-8 md:p-12 bg-gray-50">
-                <Benefits/>
+              <Benefits />
             </div>
           </div>
         </div>

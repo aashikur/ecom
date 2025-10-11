@@ -9,11 +9,12 @@ const Banner = () => {
             <div className="absolute inset-0">
                 <Image 
                     src="/assets/banner.jpg" 
-                    alt="Banner" 
-                    width={1920} 
-                    height={1080} 
-                    className="object-cover w-full h-full filter brightness-50"
+                    alt="Banner"
+                    width="1920"
+                    height="1080"
+                    decoding="async"
                     priority
+                    class="object-cover object-right w-full h-full filter brightness-30 sm:brightness-50"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
             </div>

@@ -5,8 +5,9 @@ import { BiLogOut } from "react-icons/bi";
 import Image from "next/image";
 
 const AuthButton = ({ className = "" }) => {
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
 
+    if( session && status === "loading") return <div>Loading...</div>
     if (session) {
         return (
             <div className="flex items-center gap-4">

@@ -9,7 +9,7 @@ export const authOptions = {
     }),
   ],
   session: {
-    strategy: "jwt", // default for App Router
+    strategy: "jwt", // We stored in Client Session
   },
   pages: {
     signIn: "/login", // optional: custom login page

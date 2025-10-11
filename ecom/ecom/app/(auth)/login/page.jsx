@@ -34,6 +34,17 @@ const LoginPage = () => {
                             <div className="max-w-sm mx-auto">
                                 <h2 className="text-3xl font-bold text-gray-800 mb-8">Welcome Back</h2>
 
+
+                                {/* Google Sign In */}
+                                <div className='my-6 flex justify-center'>
+                                    <AuthButton className="w-full py-3 text-center" />
+                                </div>
+
+                                <div className="divider relative text-center py-4">
+                                    <div className="line w-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  border-t border-gray-200 z-0"></div>
+                                    <span className='text-gray-600 bg-white z-10 '>or</span>
+                                </div>
+
                                 {/* Login Form */}
                                 <form className="space-y-6">
                                     <div>
@@ -80,19 +91,6 @@ const LoginPage = () => {
                                     </button>
                                 </form>
 
-                                {/* Google Sign In */}
-                                <div className="mt-6 hidden">
-                                    <button className="w-full flex items-center justify-center gap-2 bg-white border border-gray-200 text-gray-700 py-3 px-6 rounded-xl font-medium hover:bg-gray-50 transition-colors">
-                                        <FaGoogle className="text-red-500" />
-                                        Sign in with Google
-                                    </button>
-                                </div>
-
-
-                                {/* Google Sign In */}
-                               <div className='my-6 flex justify-center'>
-                                 <AuthButton className="w-full py-3 text-center" />
-                               </div>
 
 
                                 {/* Sign Up Link */}

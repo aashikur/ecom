@@ -14,7 +14,7 @@ const Banner = () => {
                     height="1080"
                     decoding="async"
                     priority
-                    class="object-cover object-right w-full h-full filter brightness-30 sm:brightness-50"
+                    className="object-cover object-right w-full h-full filter brightness-30 sm:brightness-50"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
             </div>

@@ -1,26 +1,24 @@
+// dbConfig/dbconfig.js
 import mongoose from "mongoose";
- 
-// Fix the error by returning a promise
+
 export async function connect() {
+  try {
+    const connection = await mongoose.connect(process.env.MONGO_URI, {
+      dbName: process.env.DB_NAME || "e-shop", // optional
+    });
 
-        try {
-            mongoose.connect(process.env.MONGO_URI);
+    mongoose.connection.on("connected", () => {
+      console.log("✅ Mongoose connected successfully");
+    });
 
-            const connection = mongoose.connection;
+    mongoose.connection.on("error", (err) => {
+      console.error("❌ Mongoose connection error:", err);
+      process.exit(1);
+    });
 
-            connection.on("connected", () => {
-                console.log("Mongoose is connected");
-            })
-
-            connection.on("error", (err) =>{
-                console.log("Connection error with Mongoose: ",err);
-                process.exit();
-
-            })
-
-
-
-        } catch (error) {
-            console.log("connection error with Mongoose: ",error);
-        }
+    return connection;
+  } catch (error) {
+    console.error("❌ MongoDB connection failed:", error);
+    throw error;
+  }
 }

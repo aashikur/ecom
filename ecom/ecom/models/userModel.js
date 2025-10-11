@@ -1,32 +1,46 @@
-import mongoose from "mongoose"
+// models/userModel.js
+import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema(
+  {
     username: {
-        type: string,
-        required: [true, "Please add a username"],
-        unique: true
+      type: String,
+      required: [true, "Please add a username"],
+      unique: true,
+      trim: true,
     },
     email: {
-        type: string,
-        required: [true, "Please add a email"],
-        unique: true
+      type: String,
+      required: [true, "Please add an email"],
+      unique: true,
+      lowercase: true,
+      trim: true,
     },
     isVerified: {
-        type: Boolean,
-        default: false
+      type: Boolean,
+      default: false,
     },
     isAdmin: {
-        type: Boolean,
-        default: false
+      type: Boolean,
+      default: false,
     },
-    forgotPasswordToken: string,
-    forgotPasswordTokenExpiry: Date,
-    verifyToken: string,
-    verifyTokenExpiry: Date,
+    forgotPasswordToken: {
+      type: String,
+    },
+    forgotPasswordTokenExpiry: {
+      type: Date,
+    },
+    verifyToken: {
+      type: String,
+    },
+    verifyTokenExpiry: {
+      type: Date,
+    },
+  },
+  { timestamps: true }
+);
 
-})
-
-
-const User = mongoose.models.users ||  mongoose.model("users", userSchema);
+// Prevent model overwrite during hot reload (Next.js issue)
+const User = mongoose.models.User || mongoose.model("User", userSchema);
 
 export default User;

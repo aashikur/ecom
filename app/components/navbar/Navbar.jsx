@@ -19,8 +19,8 @@ const Navbar = () => {
     const dashboardRef = useRef(null);
 
     const { data: session, status } = useSession();
-    console.log('seesion: ', session, "/n\n status: " + status);
 
+    
 
     useEffect(() => {
         const handleClickOutside = (e) => {
